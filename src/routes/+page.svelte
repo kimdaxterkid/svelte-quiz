@@ -1,2 +1,10 @@
-<h1 class="bg-blue-400 rounded shadow">Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import quizzes from "../data.json";
+	import Card from "../components/Card.svelte";
+</script>
+
+<div class="quizzes-container w-[700px] m-auto flex justify-center h-screen items-center">
+	{#each quizzes as quiz (quiz.id)}
+		<Card {quiz} />
+	{/each}
+</div>
