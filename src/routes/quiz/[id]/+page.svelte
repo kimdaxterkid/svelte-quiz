@@ -1,3 +1,7 @@
+<script lang="ts">
+	export let data: any;
+</script>
+
 <div>
-	<h1>Quiz Page</h1>
+	<h1>{data.name}</h1>
 </div>
