@@ -4,6 +4,8 @@
 	import QuestionText from "./components/QuestionText.svelte";
 	import { answers, type Answer } from "../../../store";
 	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
+	import QuestionProgressCircle from "./components/QuestionProgressCircle.svelte";
 
 	export let data: any;
 	let currentQuestionIndex = 0;
@@ -38,9 +40,25 @@
 	});
 
 	$: question = data.questions[currentQuestionIndex];
+
+	onMount(() => {
+		answers.set(
+			data.questions.map((question: any) => {
+				return {
+					id: question.id,
+					isCorrect: null,
+				};
+			})
+		);
+	});
 </script>
 
 <div class="w-full">
+	<div class="flex justify-center">
+		{#each answersValue as answer}
+			<QuestionProgressCircle isCorrect={answer.isCorrect} />
+		{/each}
+	</div>
 	<QuestionText text={question.question} />
 
 	<div class="flex justify-between flex-wrap cursor-pointer">
